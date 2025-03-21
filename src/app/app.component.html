@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <title>Gerenciador de Arquivos</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+  <div class="upload-container">
+    <h2>Upload de Arquivo</h2>
+
+    <div class="upload-area" [class.dragover]="isDragOver" (dragover)="onDragOver($event)" (dragleave)="onDragLeave()"
+      (drop)="onDrop($event)">
+
+      <div *ngIf="!selectedFile">
+        <p>Arraste um arquivo aqui ou</p>
+        <button (click)="fileInput.click()">Selecione um arquivo</button>
+        <input #fileInput type="file" (change)="onFileSelected($event)" style="display: none">
+      </div>
+
+      <div *ngIf="selectedFile" class="file-info">
+        <p>Arquivo selecionado: {{ selectedFile.name }}</p>
+        <p>Tamanho: {{ (selectedFile.size / 1024).toFixed(2) }} KB</p>
+        <button (click)="uploadFile()">Enviar</button>
+        <button (click)="cancelSelection()">Cancelar</button>
+      </div>
+    </div>
+
+    <div *ngIf="uploading" class="progress-container">
+      <p>Enviando...</p>
+      <div class="progress-bar">
+        <div class="progress" [style.width.%]="uploadProgress"></div>
+      </div>
+      <p>{{ uploadProgress }}%</p>
+    </div>
+
+    <div *ngIf="uploadComplete" class="message success">
+      <p>Upload concluído com sucesso!</p>
+    </div>
+
+    <div *ngIf="uploadError" class="message error">
+      <p>{{ errorMessage }}</p>
+    </div>
+
+    <div class="question-container">
+      <h3>Faça uma pergunta sobre um arquivo</h3>
+      <input type="text" [(ngModel)]="fileName" placeholder="Nome do arquivo">
+      <input type="text" [(ngModel)]="question" placeholder="Digite sua pergunta">
+      <button (click)="askQuestion()">Perguntar</button>
+    </div>
+
+    <div *ngIf="answer" class="answer-container">
+      <h3>Resposta:</h3>
+      <p>{{ answer }}</p>
+    </div>
+  </div>
+</body>
+
+</html>
