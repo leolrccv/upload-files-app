@@ -73,7 +73,7 @@ export class AppComponent {
     formData.append('file', this.selectedFile);
 
     this.http
-      .post(this.apiUrl + 'api/drive-management/v1/file/convert', formData, {
+      .post(this.apiUrl + 'drive-management/file-convert', formData, {
         responseType: 'blob',
         observe: 'events',
         reportProgress: true
@@ -133,7 +133,7 @@ export class AppComponent {
       question: this.question
     };
 
-    this.http.post<any>(this.apiUrl + 'api/drive-management/v1/file/analyze', body)
+    this.http.post<any>(this.apiUrl + 'drive-management/file-analyze', body)
       .subscribe(response => {
         this.answer = response.data?.answer || 'Nenhuma resposta encontrada';
       }, (e) => {

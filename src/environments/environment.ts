@@ -1,3 +1,3 @@
 export const environment = {
-    apiUrl: 'http://54.152.244.75:8080/'
+    apiUrl: 'https://ijawrl1r93.execute-api.us-east-1.amazonaws.com/tst/'
 };
