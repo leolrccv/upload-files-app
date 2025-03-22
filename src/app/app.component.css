@@ -1,123 +1,163 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  background-color: #f4f4f9;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
 .container {
-  background: #fff;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 500px;
+  max-width: 550px;
   text-align: center;
+  backdrop-filter: blur(5px);
 }
 
-h2,
+h2 {
+  color: #2c3e50;
+  margin: 0 0 20px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
 h3 {
-  color: #333;
+  color: #34495e;
   margin: 0 0 15px;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .upload-area {
-  border: 2px dashed #4285f4;
-  border-radius: 8px;
-  padding: 25px;
+  border: 2px dashed #3498db;
+  border-radius: 10px;
+  padding: 30px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  background: rgba(52, 152, 219, 0.05);
+  transition: all 0.3s ease;
 }
 
 .upload-area:hover {
-  background: rgba(66, 133, 244, 0.1);
+  background: rgba(52, 152, 219, 0.15);
+  border-color: #2980b9;
+  transform: translateY(-2px);
 }
 
-.file-info,
-.question-container {
-  margin-top: 15px;
+.file-info {
+  margin-top: 20px;
+  padding: 15px;
+  background: #ecf0f1;
+  border-radius: 8px;
 }
 
 button {
-  background-color: #4285f4;
+  background: linear-gradient(45deg, #3498db, #2980b9);
   color: white;
   border: none;
-  padding: 12px 18px;
-  border-radius: 5px;
+  padding: 12px 25px;
+  border-radius: 25px;
   cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s ease;
-  margin: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin: 8px;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
 }
 
 button:hover {
-  background-color: #3367d6;
+  background: linear-gradient(45deg, #2980b9, #2471a3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
 }
 
 .progress-bar {
-  height: 10px;
-  background-color: #e0e0e0;
-  border-radius: 5px;
-  margin: 10px 0;
+  height: 12px;
+  background: #ecf0f1;
+  border-radius: 6px;
+  margin: 15px 0;
   overflow: hidden;
+  position: relative;
 }
 
 .progress {
   height: 100%;
-  background-color: #4285f4;
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg, #2ecc71, #27ae60);
+  transition: width 0.4s ease;
 }
 
 .message {
-  padding: 10px;
-  border-radius: 5px;
-  margin: 10px 0;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease-in;
 }
 
 .success {
-  background-color: #d4edda;
-  color: #155724;
+  background: rgba(46, 204, 113, 0.1);
+  color: #27ae60;
+  border: 1px solid #2ecc71;
 }
 
 .error {
-  background-color: #f8d7da;
-  color: #721c24;
+  background: rgba(231, 76, 60, 0.1);
+  color: #c0392b;
+  border: 1px solid #e74c3c;
 }
 
 .question-container {
-  background: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: rgba(236, 240, 241, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .question-container input {
   width: 100%;
-  padding: 10px;
+  padding: 12px 15px;
   margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.question-container input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+  outline: none;
 }
 
 .answer-container {
-  background: #e8f0fe;
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: rgba(52, 152, 219, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  border: 1px solid rgba(52, 152, 219, 0.3);
+  color: #2c3e50;
+  animation: slideIn 0.3s ease-in;
+}
+
+.answer-container.error-answer {
+  background: rgba(231, 76, 60, 0.1);
+  color: #c0392b;
+  border: 1px solid #e74c3c;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -23,6 +23,7 @@ export class AppComponent {
   question = '';
   answer = '';
   showRequiredError: boolean = false;
+  isAnswerError: boolean = false;
 
   apiUrl = environment.apiUrl;
 
@@ -58,6 +59,9 @@ export class AppComponent {
 
   cancelSelection(): void {
     this.selectedFile = null;
+    this.uploadError = false;
+    this.errorMessage = '';
+    this.uploadComplete = false;
   }
 
   uploadFile(): void {
@@ -130,22 +134,28 @@ export class AppComponent {
     if (!this.fileName.trim()) {
       this.showRequiredError = true;
       this.answer = '';
+      this.isAnswerError = false;
       return;
     }
 
     this.showRequiredError = false;
-    
+
     const body = {
       fileName: this.fileName,
       question: !this.question.trim() ? undefined : this.question
     };
 
     this.http.post<any>(this.apiUrl + 'drive-management/file-analyze', body)
-      .subscribe(response => {
-        this.answer = response.data?.answer || 'Nenhuma resposta encontrada';
-      }, (e) => {
-        let notifications = e.error.notifications;
-        this.answer = notifications ? notifications[0] : 'Erro ao obter resposta';
-      });
+      .subscribe(
+        response => {
+          this.answer = response.data?.answer || 'Nenhuma resposta encontrada';
+          this.isAnswerError = false;
+        },
+        (e) => {
+          let notifications = e.error.notifications;
+          this.answer = notifications ? notifications[0] : 'Não foi possível obter a resposta. Tente novamente.';
+          this.isAnswerError = true;
+        }
+      );
   }
 }
