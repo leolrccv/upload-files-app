@@ -22,6 +22,7 @@ export class AppComponent {
   fileName = '';
   question = '';
   answer = '';
+  showRequiredError: boolean = false;
 
   apiUrl = environment.apiUrl;
 
@@ -126,11 +127,17 @@ export class AppComponent {
   }
 
   askQuestion(): void {
-    if (!this.fileName.trim() || !this.question.trim()) return;
+    if (!this.fileName.trim()) {
+      this.showRequiredError = true;
+      this.answer = '';
+      return;
+    }
 
+    this.showRequiredError = false;
+    
     const body = {
       fileName: this.fileName,
-      question: this.question
+      question: !this.question.trim() ? undefined : this.question
     };
 
     this.http.post<any>(this.apiUrl + 'drive-management/file-analyze', body)
